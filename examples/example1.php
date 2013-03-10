@@ -11,7 +11,7 @@ if (isset($_GET['keyword']) && $_GET['keyword']){
 require_once("../curl.class.php");
 
 $curl = new Curl();
-$page = $curl->get("http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313&_nkw=".$keyword."&_sacat=0&_from=R40");
+$page = $curl->get("http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313&_nkw=".urlencode($keyword)."&_sacat=0&_from=R40");
 
 if ($page && $curl->getHttpCode()>=200 && $curl->getHttpCode()<400){
 	
