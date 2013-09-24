@@ -3,7 +3,7 @@
 require_once("../curl.class.php");
 
 $proxy = "IP:PORT"
-$pauth = "user:pass";
+$auth = "user:pass";
 
 $curl = new Curl();
 
