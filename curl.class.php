@@ -153,6 +153,17 @@ class Curl {
         }
     }
 
+    function setProxy($proxy,$pauth=0){
+        curl_setopt($this->curl, CURLOPT_HTTPPROXYTUNNEL, true);
+        curl_setopt($this->curl, CURLOPT_PROXY, $proxy);
+        if ($pauth) curl_setopt($this->curl, CURLOPT_PROXYUSERPWD, $pauth);
+
+    }
+
+    function setFileDownload(&$fp){
+        curl_setopt($this->curl, CURLOPT_FILE, $fp);
+    }
+
     function getHttpCode() {
         return curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
     }
@@ -176,7 +187,7 @@ class Curl {
     function maybeFollow($page) {
         if (strpos($page, "\r\n\r\n") !== false) {
             list($headers, $page) = explode("\r\n\r\n", $page, 2);
-        }       
+        }
         
         $code = $this->getHttpCode();
         
