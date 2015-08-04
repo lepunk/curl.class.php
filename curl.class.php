@@ -1,7 +1,7 @@
 <?php
 
 class Curl {
-	
+    
     public $curl;
     public $manual_follow;
     public $redirect_url;
