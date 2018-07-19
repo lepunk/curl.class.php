@@ -111,7 +111,7 @@ class Curl {
     }
 
     function setDataMode($val){
-         curl_setopt($this->curl, CURLOPT_BINARYTRANSFER, $val);
+         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, $val);
     }
     
     function close() {
@@ -172,8 +172,12 @@ class Curl {
     function makeQuery($data) { 
         if (is_array($data)) {
             $fields = array();
-            foreach ($data as $key => $value) {
-                 $fields[] = $key . '=' . urlencode($value);
+            foreach ($data as $key => $value) {				
+				if(is_array($value))
+					$fields[] = $key."[]=".implode("&".$key."[]=",$value);
+				else
+					$fields[] = $key . '=' . urlencode($value);
+				
             }
             $fields = implode('&', $fields);
         } else {
